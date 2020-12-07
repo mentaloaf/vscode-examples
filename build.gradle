@@ -1,0 +1,33 @@
+allprojects  {
+  group = 'b.a'
+  version = '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 14
+  targetCompatibility = 14
+
+  repositories {
+    mavenLocal()
+    maven { url "https://repo.maven.apache.org/maven2" }
+  }
+
+  ext {
+      springVersion = '5.2.9.RELEASE'
+      springBootVersion = '2.4.0'
+      springDataJpaVersion = '2.3.0.RELEASE'
+      camelVersion = '3.6.0'
+      activemqVersion = '5.15.8'
+      jaxbVersion = '2.3.1'
+      hibernateVersion = '5.4.24.Final'
+      log4jVersion = '2.11.1'
+      jacksonVersion = '2.11.3'
+      jquantlibVersion  = '0.2.5'
+      postgresqlDriverVersion = '42.1.4'
+ } 
+
+  configurations {
+    all*.exclude group: 'xml-apis', module: 'xml-apis'
+  }
+}

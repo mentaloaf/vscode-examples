@@ -1,0 +1,6 @@
+rootProject.name = 'ACME Inc'
+include ':app'
+include ':lib'
+
+project(':app').projectDir = "$rootDir/app" as File
+project(':lib').projectDir = "$rootDir/lib" as File

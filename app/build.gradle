@@ -1,0 +1,57 @@
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources", "${project.rootDir}/common/resources"
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:" + springBootVersion)
+    }
+}
+
+repositories {
+
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'app-spring-boot'
+    version =  '0.1.0'
+}
+
+dependencies {
+  compile(project(':lib')) {
+	exclude(group: 'net.sf.jgap')
+	exclude(group: 'log4j')
+    }
+    implementation 'org.springframework.boot:spring-boot-starter:' + springBootVersion
+    compile 'org.gnu:gnu-crypto:2.0.1'
+    compile 'org.apache.logging.log4j:log4j-api:' + log4jVersion
+    compile 'org.apache.logging.log4j:log4j-core:' + log4jVersion
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:' + log4jVersion
+    compile 'org.apache.camel:camel-jms:' + camelVersion
+    compile 'org.apache.camel:camel-spring:' + camelVersion
+    compile 'org.apache.activemq:activemq-camel:' + activemqVersion
+    compile 'org.postgresql:postgresql:42.1.4'
+    compile 'org.springframework:spring-orm:' + springVersion
+    compile 'org.springframework:spring-oxm:' + springVersion
+    compile 'org.springframework.data:spring-data-jpa:' + springDataJpaVersion
+    compile 'org.hibernate:hibernate-core:' + hibernateVersion
+}
+
+configurations {
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' // exclude when using log4j
+}
+
+springBoot {
+    mainClassName = 'b.a.a.Application'
+}
